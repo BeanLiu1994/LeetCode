@@ -18,6 +18,9 @@ public:
 		int Size = input.size();
 		if (Size > 2)
 		{
+			for (int i = 0;i<2)
+
+
 			string subinput; subinput.reserve(Size - 1);
 			for (int i = 0; i < Size - 1; i++) subinput.push_back(input[i] + '0');
 			// for "+" condition...
