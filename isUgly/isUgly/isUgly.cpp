@@ -24,23 +24,19 @@ public:
 		return i - 1;
 	}
 	int nthUglyNumber(int n) {
-		int Maximum = INT_MAX / 10;
-		vector<int> UglyNumbers; UglyNumbers.reserve(Maximum);
+		int count = 1;
+		vector<int> UglyNumbers; UglyNumbers.reserve(n);
 		UglyNumbers.push_back(1);
-		int max[3], iter[3];
-		max[0] = ceil(log10(Maximum) / log10(2));
-		max[1] = ceil(log10(Maximum) / log10(3));
-		max[2] = ceil(log10(Maximum) / log10(5));
-		for (iter[0] = 0; iter[0] <= max[0]; ++iter[0])
-			for (iter[1] = 0; iter[1] <= max[1]; ++iter[1])
-				for (iter[2] = 0; iter[2] <= max[2]; ++iter[2]) {
-					int tmp = pow(2, iter[0]) * pow(3, iter[1]) * pow(5, iter[2]);
-					if (tmp < 0)continue;
-					else UglyNumbers.push_back(tmp);
-				}
-		sort(UglyNumbers.begin(), UglyNumbers.end());
-		vector<int>::iterator iterer = unique(UglyNumbers.begin(), UglyNumbers.end());
-		UglyNumbers.erase(iterer, UglyNumbers.end());
+		for (; count < n;) {
+			int min = UglyNumbers[count-1]*2;
+			for (int i = 0; i < UglyNumbers.size() && count < n; i++) {
+				if (find(UglyNumbers.begin(), UglyNumbers.end(), UglyNumbers[i] * 2) == UglyNumbers.end()) { if (UglyNumbers[i] * 2 < min&&UglyNumbers[i] * 2>0) min = UglyNumbers[i] * 2; }
+				if (find(UglyNumbers.begin(), UglyNumbers.end(), UglyNumbers[i] * 3) == UglyNumbers.end()) { if (UglyNumbers[i] * 3 < min&&UglyNumbers[i] * 3>0) min = UglyNumbers[i] * 3; }
+				if (find(UglyNumbers.begin(), UglyNumbers.end(), UglyNumbers[i] * 5) == UglyNumbers.end()) { if (UglyNumbers[i] * 5 < min&&UglyNumbers[i] * 5>0) min = UglyNumbers[i] * 5; }
+			}
+			UglyNumbers.push_back(min);
+			++count;
+		}
 		return UglyNumbers[n - 1];
 	}
 };
