@@ -1,6 +1,9 @@
-/*
-!.gitignore
-!*.cpp
-!*.c
-!*.py
-!*.java
+*.*log
+*.*sdf
+*.obj
+*.idb
+*.pdb
+*.lastbuildstate
+*.ilk
+*.exe
+*.suo
